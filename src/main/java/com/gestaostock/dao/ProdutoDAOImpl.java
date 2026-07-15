@@ -101,8 +101,22 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 
     @Override
     public void deletar(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deletar'");
+        String sql = "DELETE FROM Produto WHERE id = ?";
+
+        try (Connection conn = ConexaoFactory.getConexao()) {
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, id);
+
+            int linhasAfetadas = ps.executeUpdate();
+            if (linhasAfetadas == 0) {
+                throw new RuntimeException("Nenhum produto foi encontrado com o Id " + id);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao deletar produto", e);
+        }
     }
 
 }
