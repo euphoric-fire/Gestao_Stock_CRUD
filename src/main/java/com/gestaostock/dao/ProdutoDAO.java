@@ -5,8 +5,8 @@ import java.util.List;
 import com.gestaostock.model.Produto;
 
 public interface ProdutoDAO {
-    
-    void inserir(Produto Produto);
+
+    void inserir(Produto produto);
 
     Produto buscarPorId(int id);
 
